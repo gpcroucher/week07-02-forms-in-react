@@ -20,29 +20,22 @@ export default function Form() {
           onChange={handleChange}
         />
         <p>Current value is: {formData.name}</p>
-        {makePetInputs()}
-        {/* <PetsInput id={0} formData={formData} handleChange={handlePetsChange} />
-        <PetsInput id={1} formData={formData} handleChange={handlePetsChange} /> */}
+        {new Array(numberOfPets).fill("").map((element, index) => {
+          console.log("tried to make pet #", index);
+          return (
+            <PetsInput
+              key={index}
+              id={index}
+              formData={formData}
+              handleChange={handlePetsChange}
+            />
+          );
+        })}
         <button type="submit">Submit</button>
       </form>
       <button onClick={addPetInput}>Add another pet</button>
     </>
   );
-
-  function makePetInputs() {
-    let result = [];
-    for (let i = 0; i < numberOfPets; i++) {
-      result.push(
-        <PetsInput
-          key={i}
-          id={i}
-          formData={formData}
-          handleChange={handlePetsChange}
-        />
-      );
-    }
-    return result;
-  }
 
   function addPetInput() {
     setNumberOfPets(numberOfPets + 1);
